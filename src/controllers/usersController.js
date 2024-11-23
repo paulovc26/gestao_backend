@@ -12,27 +12,23 @@ const getOne = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const createdUser = await userModel.createUser(req.body);
-  return res.status(201).json(createdUser);
+  try {
+    // Criar o usuário
+    const createdUser = await userModel.createUser(req.body);
+
+    // Retornar o usuário criado com status 201
+    return res.status(201).json(createdUser);
+  } catch (error) {
+    // Se ocorrer algum erro, capturar e logar
+    console.error("Erro ao criar usuário:", error);
+
+    // Retornar uma resposta de erro com status 500
+    return res.status(500).json({
+      message: "Erro ao criar o usuário",
+      error: error.message,
+    });
+  }
 };
-
-//  todo put e delete controller
-
-// const deleteTask = async (req, res) => {
-//   const { id } = req.params;
-
-//   await userModel.deleteTask(id);
-
-//   return res.status(204).json({});
-// };
-
-// const updateTask = async (req, res) => {
-//   const { id } = req.params;
-
-//   await userModel.updateTask(id, req.body);
-
-//   return res.status(204).json({});
-// };
 
 module.exports = {
   getAll,

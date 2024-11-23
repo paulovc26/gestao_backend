@@ -2,22 +2,25 @@ const connection = require("./connection");
 const bcrypt = require("bcrypt");
 
 const getAllUsers = async () => {
-  const [users] = await connection.execute("SELECT * FROM users");
+  const [users] = await connection.execute(
+    "SELECT * FROM gestao_empresarial.users"
+  );
   return users;
 };
 
-const getOneUser = async (username) => {
-  const query = "SELECT * FROM users WHERE username = ?";
+const getOneUser = async (email) => {
+  const query = "SELECT * FROM gestao_empresarial.users WHERE email = ?";
   const [user] = await connection.execute(query, [email]);
   return user[0];
 };
 
 const createUser = async (user) => {
-  const { email, password } = user;
+  const { email, senha } = user;
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(senha, 10);
 
-  const query = "INSERT INTO users(email, password) VALUES (?, ?)";
+  const query =
+    "INSERT INTO gestao_empresarial.users(email, senha) VALUES (?, ?)";
 
   const [createdUser] = await connection.execute(query, [
     email,
