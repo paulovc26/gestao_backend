@@ -9,24 +9,24 @@ const connection = mysql.createPool({
   database: process.env.MYSQL_DB,
 });
 
-const createTableColaborador = `CREATE TABLE IF NOT EXISTS colaboradores (
-id INT AUTO_INCREMENT PRIMARY KEY,
-nome VARCHAR(125) NOT NULL,
-cargo VARCHAR(70) NOT NULL,
-salario DECIMAL(10,2) NOT NULL
-)`;
+// const createTableColaborador = `CREATE TABLE IF NOT EXISTS colaboradores (
+// id INT AUTO_INCREMENT PRIMARY KEY,
+// nome VARCHAR(125) NOT NULL,
+// cargo VARCHAR(70) NOT NULL,
+// salario DECIMAL(10,2) NOT NULL
+// )`;
 
-// logica para inicializar os dados
+// // logica para inicializar os dados
 
-async function initializeDatabse() {
-  try {
-    const [results] = await connection.query(createTableColaborador);
-    console.log();
-  } catch (error) {
-    console.error("erro ao criar tabela: ", error);
-  }
-}
+// async function initializeDatabse() {
+//   try {
+//     const [results] = await connection.query(createTableColaborador);
+//     console.log();
+//   } catch (error) {
+//     console.error("erro ao criar tabela: ", error);
+//   }
+// }
 
-initializeDatabse();
+// initializeDatabse();
 
 module.exports = connection;

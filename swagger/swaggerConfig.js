@@ -5,11 +5,11 @@ const swaggerOptions = {
   swaggerDefinition: {
     openapi: "3.0.0",
     info: {
-      title: "API do PV",
+      title: "API's pessoais",
       version: "1.0.0",
-      description: "API Criadas pelo PV para o PV",
+      description: "API Criadas para projeto pessoal PV",
       contact: {
-        name: "Abacaxi",
+        name: "API Backend Gestão",
       },
       servers: [
         {
