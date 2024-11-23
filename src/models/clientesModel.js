@@ -13,11 +13,11 @@ const getAllClientes = async () => {
 // };
 
 const createCliente = async (cliente) => {
-  const { nome } = cliente;
+  const { nome, cpf_cnpj } = cliente;
 
-  const query = "INSERT INTO tb_clientes(nome) VALUES (?)";
+  const query = "INSERT INTO tb_clientes(nome, cpf_cnpj) VALUES (?, ?)";
 
-  const [createdCliente] = await connection.execute(query, [nome]);
+  const [createdCliente] = await connection.execute(query, [nome, cpf_cnpj]);
 
   return createdCliente;
 };
@@ -29,10 +29,27 @@ const deleteCliente = async (id) => {
 };
 
 const updateCliente = async (id, cliente) => {
-  const query = "UPDATE tb_clientes SET nome = ? where id = ?;";
-  const { nome } = cliente;
+  const fields = [];
+  const values = [];
 
-  const updatedCliente = await connection.execute(query, [nome, id]);
+  if (cliente.nome !== undefined) {
+    fields.push("nome = ?");
+    values.push(cliente.nome);
+  }
+  if (cliente.cpf_cnpj !== undefined) {
+    fields.push("cpf_cnpj = ?");
+    values.push(cliente.cpf_cnpj);
+  }
+
+  values.push(id);
+
+  const query = `UPDATE tb_clientes
+    SET ${fields.join(", ")}
+    where id = ?;
+    `;
+
+  const [updatedCliente] = await connection.execute(query, values);
+
   return updatedCliente;
 };
 
