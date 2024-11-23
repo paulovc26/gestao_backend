@@ -1,6 +1,7 @@
 // routes/index.js
 const express = require("express");
 const router = express.Router();
+const authMiddleware = require("../middlewares/authMiddleware");
 
 const app = express();
 app.use(express.json());
@@ -22,5 +23,10 @@ router.use(servicosRoute);
 router.use(contratosClientesRoute);
 router.use(contratosFornecedoresRoute);
 router.use(authRoute);
+
+// testar toa autenticada
+router.get("/test", authMiddleware.checkToken, (req, res) => {
+  res.status(200).json({ msg: "olá!" });
+});
 
 module.exports = router;
