@@ -15,7 +15,7 @@ const getAllServicos = async () => {
 const createServico = async (servico) => {
   const { nome_servico } = servico;
 
-  const query = "INSERT INTO tb_servicos(nome_servico) VALUES (?, ?)";
+  const query = "INSERT INTO tb_servicos(nome_servico) VALUES (?)";
 
   const [createdServico] = await connection.execute(query, [nome_servico]);
 
