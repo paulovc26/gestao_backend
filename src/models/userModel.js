@@ -8,19 +8,19 @@ const getAllUsers = async () => {
 
 const getOneUser = async (username) => {
   const query = "SELECT * FROM users WHERE username = ?";
-  const [user] = await connection.execute(query, [username]);
+  const [user] = await connection.execute(query, [email]);
   return user[0];
 };
 
 const createUser = async (user) => {
-  const { username, password } = user;
+  const { email, password } = user;
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const query = "INSERT INTO users(username, password) VALUES (?, ?)";
+  const query = "INSERT INTO users(email, password) VALUES (?, ?)";
 
   const [createdUser] = await connection.execute(query, [
-    username,
+    email,
     hashedPassword,
   ]);
 

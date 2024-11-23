@@ -6,6 +6,12 @@ const getAllContratos = async () => {
   return contratos;
 };
 
+const getContratoById = async (id) => {
+  const query = "SELECT * FROM tb_contrato_cliente WHERE id = ?";
+  const [contrato] = await connection.execute(query, [id]);
+  return contrato[0]; // Retorna o primeiro resultado (caso exista)
+};
+
 const createContrato = async (contrato) => {
   const {
     id_cliente,
@@ -92,6 +98,7 @@ const deleteContrato = async (id) => {
 
 module.exports = {
   getAllContratos,
+  getContratoById,
   createContrato,
   updateContrato,
   deleteContrato,

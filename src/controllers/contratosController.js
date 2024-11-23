@@ -1,4 +1,7 @@
 const contratosModel = require("../models/contratosModel");
+const contratoService = require("../services/contratoService");
+
+// GET CONTROLLERS
 
 const getAll = async (req, res) => {
   try {
@@ -11,6 +14,35 @@ const getAll = async (req, res) => {
       .json({ message: "Erro ao obter contratos", error: error.message });
   }
 };
+
+const obterDiasRestantes = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    // Buscar o contrato no banco de dados
+    const contrato = await contratosModel.getContratoById(id);
+
+    if (!contrato) {
+      return res.status(404).json({ message: "Contrato não encontrado" });
+    }
+
+    // Obter a data de fim do contrato
+    const { data_fim } = contrato;
+
+    // Usar o serviço para calcular os dias restantes
+    const diasRestantes = contratoService.calcularDiasRestantes(data_fim);
+
+    return res.status(200).json({ diasRestantes });
+  } catch (error) {
+    console.error("Erro ao calcular os dias restantes do contrato:", error);
+    return res.status(500).json({
+      message: "Erro ao calcular os dias restantes",
+      error: error.message,
+    });
+  }
+};
+
+// outros
 
 const createContrato = async (req, res) => {
   try {
@@ -69,6 +101,7 @@ const updateContrato = async (req, res) => {
 
 module.exports = {
   getAll,
+  obterDiasRestantes,
   createContrato,
   updateContrato,
   deleteContrato,
