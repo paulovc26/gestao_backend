@@ -27,9 +27,9 @@ const usersController = require("../controllers/usersController");
  *                     example: Senha
  */
 
-router.get("/api/users", usersController.getAll);
+router.get("/api/users", authMiddleware.checkToken, usersController.getAll);
 
-router.post("/api/users", usersController.createUser);
+router.post("/api/register", usersController.createUser);
 
 // todo put e delete
 

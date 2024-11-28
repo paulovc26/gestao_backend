@@ -1,17 +1,34 @@
 const express = require("express");
 const router = express.Router();
 const servicosController = require("../controllers/servicosController");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 // GET ROUTES
-router.get("/api/servicos", servicosController.getAll);
+router.get(
+  "/api/servicos",
+  authMiddleware.checkToken,
+  servicosController.getAll
+);
 
 // POST ROUTES
-router.post("/api/servicos", servicosController.createServico);
+router.post(
+  "/api/servicos",
+  authMiddleware.checkToken,
+  servicosController.createServico
+);
 
 // PUT ROUTES
-router.put("/api/servicos/:id", servicosController.updateServico);
+router.put(
+  "/api/servicos/:id",
+  authMiddleware.checkToken,
+  servicosController.updateServico
+);
 
 // DELETE ROUTES
-router.delete("/api/servicos/:id", servicosController.deleteServico);
+router.delete(
+  "/api/servicos/:id",
+  authMiddleware.checkToken,
+  servicosController.deleteServico
+);
 
 module.exports = router;

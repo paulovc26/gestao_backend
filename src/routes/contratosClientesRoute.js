@@ -1,21 +1,39 @@
 const express = require("express");
 const router = express.Router();
+const authMiddleware = require("../middlewares/authMiddleware");
 const contratosClientesController = require("../controllers/contratosClientesController");
 
 // GET ROUTES
-router.get("/api/contratos", contratosClientesController.getAll);
+router.get(
+  "/api/contratos",
+  authMiddleware.checkToken,
+  contratosClientesController.getAll
+);
 router.get(
   "/api/contratos/:id",
+  authMiddleware.checkToken,
   contratosClientesController.obterDiasRestantes
 );
 
 // POST ROUTES
-router.post("/api/contratos", contratosClientesController.createContrato);
+router.post(
+  "/api/contratos",
+  authMiddleware.checkToken,
+  contratosClientesController.createContrato
+);
 
 // PUT ROUTES
-router.put("/api/contratos/:id", contratosClientesController.updateContrato);
+router.put(
+  "/api/contratos/:id",
+  authMiddleware.checkToken,
+  contratosClientesController.updateContrato
+);
 
 // DELETE ROUTES
-router.delete("/api/contratos/:id", contratosClientesController.deleteContrato);
+router.delete(
+  "/api/contratos/:id",
+  authMiddleware.checkToken,
+  contratosClientesController.deleteContrato
+);
 
 module.exports = router;
