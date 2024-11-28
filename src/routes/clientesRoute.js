@@ -1,13 +1,30 @@
 const express = require("express");
 const router = express.Router();
 const clientesController = require("../controllers/clientesController");
+const authMiddleware = require("../middlewares/authMiddleware");
 
-router.get("/api/clientes", clientesController.getAll);
+router.get(
+  "/api/clientes",
+  authMiddleware.checkToken,
+  clientesController.getAll
+);
 
-router.post("/api/clientes", clientesController.createCliente);
+router.post(
+  "/api/clientes",
+  authMiddleware.checkToken,
+  clientesController.createCliente
+);
 
-router.put("/api/clientes/:id", clientesController.updateCliente);
+router.put(
+  "/api/clientes/:id",
+  authMiddleware.checkToken,
+  clientesController.updateCliente
+);
 
-router.delete("/api/clientes/:id", clientesController.deleteCliente);
+router.delete(
+  "/api/clientes/:id",
+  authMiddleware.checkToken,
+  clientesController.deleteCliente
+);
 
 module.exports = router;

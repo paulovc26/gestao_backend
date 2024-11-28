@@ -25,8 +25,8 @@ router.use(contratosFornecedoresRoute);
 router.use(authRoute);
 
 // testar toa autenticada
-router.get("/test", authMiddleware.checkToken, (req, res) => {
-  res.status(200).json({ msg: "olá!" });
-});
+// router.get("/test", authMiddleware.checkToken, (req, res) => {
+//   res.status(200).json({ msg: "olá!" });
+// });
 
 module.exports = router;
