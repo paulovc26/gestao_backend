@@ -11,6 +11,13 @@ const swaggerOptions = {
       contact: {
         name: "API Backend Gestão",
       },
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+      },
       servers: [
         {
           url: "https://gestaobackend-production.up.railway.app",

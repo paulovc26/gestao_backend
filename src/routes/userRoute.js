@@ -44,10 +44,10 @@ router.get("/api/users", authMiddleware.checkToken, usersController.getAll);
  *           schema:
  *             type: object
  *             properties:
- *               username:
+ *               email:
  *                 type: string
  *                 example: "email@dominio.com"
- *               password:
+ *               senha:
  *                 type: string
  *                 example: "senha123"
  *     responses:
@@ -58,10 +58,10 @@ router.get("/api/users", authMiddleware.checkToken, usersController.getAll);
  *             schema:
  *               type: object
  *               properties:
- *                 username:
+ *                 email:
  *                   type: string
  *                   example: "email@dominio.com"
- *                 password:
+ *                 senha:
  *                   type: string
  *                   example: "senha123"
  *       400:
