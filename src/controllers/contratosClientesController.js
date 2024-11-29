@@ -5,7 +5,7 @@ const contratoService = require("../services/contratoService");
 
 const getAll = async (req, res) => {
   try {
-    const contratos = await contratosModel.getAllContratos();
+    const contratos = await contratosClientesModel.getAllContratos();
     return res.status(200).json({ contratos });
   } catch (error) {
     console.error("Erro ao obter contratos:", error);
@@ -20,7 +20,7 @@ const obterDiasRestantes = async (req, res) => {
 
   try {
     // Buscar o contrato no banco de dados
-    const contrato = await contratosModel.getContratoById(id);
+    const contrato = await contratosClientesModel.getContratoById(id);
 
     if (!contrato) {
       return res.status(404).json({ message: "Contrato não encontrado" });
@@ -46,7 +46,9 @@ const obterDiasRestantes = async (req, res) => {
 
 const createContrato = async (req, res) => {
   try {
-    const createdContrato = await contratosModel.createContrato(req.body);
+    const createdContrato = await contratosClientesModel.createContrato(
+      req.body
+    );
     return res.status(201).json({ createdContrato });
   } catch (error) {
     console.error("Erro ao criar contrato:", error);
@@ -60,7 +62,7 @@ const deleteContrato = async (req, res) => {
   const { id } = req.params;
 
   try {
-    await contratosModel.deleteContrato(id);
+    await contratosClientesModel.deleteContrato(id);
     return res.status(204).json({});
   } catch (error) {
     console.error("Erro ao deletar contrato:", error);
@@ -80,7 +82,10 @@ const updateContrato = async (req, res) => {
     });
   }
   try {
-    const updatedContrato = await contratosModel.updateContrato(id, contrato);
+    const updatedContrato = await contratosClientesModel.updateContrato(
+      id,
+      contrato
+    );
 
     if (updatedContrato.affectedRows === 0) {
       return res.status(404).json({
