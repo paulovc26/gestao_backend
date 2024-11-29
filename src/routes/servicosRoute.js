@@ -4,11 +4,7 @@ const servicosController = require("../controllers/servicosController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 // GET ROUTES
-router.get(
-  "/api/servicos",
-  authMiddleware.checkToken,
-  servicosController.getAll
-);
+router.get("/api/servicos", servicosController.getAll);
 
 // POST ROUTES
 router.post(
