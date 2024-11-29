@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 
 const getAllUsers = async () => {
   const [users] = await connection.execute(
-    "SELECT * FROM gestao_empresarial.users"
+    "SELECT email FROM gestao_empresarial.users"
   );
   return users;
 };

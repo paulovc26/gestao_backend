@@ -7,13 +7,13 @@ const swaggerOptions = {
     info: {
       title: "API's pessoais",
       version: "1.0.0",
-      description: "API Criadas para projeto pessoal PV",
+      description: "API Criadas para projetos PESSOAIS PV",
       contact: {
         name: "API Backend Gestão",
       },
       servers: [
         {
-          url: "http://localhost:3000",
+          url: "https://gestaobackend-production.up.railway.app",
         },
       ],
     },
