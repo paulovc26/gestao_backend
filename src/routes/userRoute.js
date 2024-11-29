@@ -31,6 +31,30 @@ const usersController = require("../controllers/usersController");
 
 router.get("/api/users", authMiddleware.checkToken, usersController.getAll);
 
+/**
+ * @swagger
+ * /api/users:
+ *   post:
+ *     summary: Registro de usuário
+ *     tags: [Register]
+ *     responses:
+ *       200:
+ *         description: Faz o cadastro de usuário
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   username:
+ *                     type: string
+ *                     example: Email
+ *                   password:
+ *                     type: string
+ *                     example: Senha
+ */
+
 router.post("/api/register", usersController.createUser);
 
 // todo put e delete

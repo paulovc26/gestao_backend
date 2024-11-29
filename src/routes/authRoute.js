@@ -6,12 +6,12 @@ const authController = require("../controllers/authController");
 /**
  * @swagger
  * /api/usermanage/login:
- *   get:
- *     summary: Retorna todos os usuários
+ *   post:
+ *     summary: Post login
  *     tags: [User]
  *     responses:
  *       200:
- *         description: Lista de usuários
+ *         description: login de teste: admin@admin.com
  *         content:
  *           application/json:
  *             schema:
