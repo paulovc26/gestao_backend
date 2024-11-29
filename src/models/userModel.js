@@ -19,8 +19,7 @@ const createUser = async (user) => {
 
   const hashedPassword = await bcrypt.hash(senha, 10);
 
-  const query =
-    "INSERT INTO gestao_empresarial.users(email, senha) VALUES (?, ?)";
+  const query = "INSERT INTO users(email, senha) VALUES (?, ?)";
 
   const [createdUser] = await connection.execute(query, [
     email,
