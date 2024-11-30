@@ -21,7 +21,7 @@ const authController = require("../controllers/authController");
  *                 example: "admin@admin.com"
  *               senha:
  *                 type: string
- *                 example: "senha123"
+ *                 example: "112233"
  *     responses:
  *       200:
  *         description: Login realizado com sucesso
@@ -35,7 +35,7 @@ const authController = require("../controllers/authController");
  *                   example: "admin@admin.com"
  *                 senha:
  *                   type: string
- *                   example: "senha123"
+ *                   example: "112233"
  *       401:
  *         description: Credenciais inválidas (usuário ou senha incorretos).
  *       500:
