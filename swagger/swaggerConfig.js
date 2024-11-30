@@ -7,7 +7,7 @@ const swaggerOptions = {
     info: {
       title: "API's pessoais",
       version: "1.0.0",
-      description: "API Criadas para projetos PESSOAIS PV",
+      description: `API Criadas para projetos PESSOAIS PV. Todas as rotas são autenticadas, por favor fazer o login, copiar o token e colar no cadeado verde "Authorize"`,
       contact: {
         name: "API Backend Gestão",
       },

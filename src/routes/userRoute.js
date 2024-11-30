@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const authMiddleware = require("../middlewares/authMiddleware");
+const usersMiddleware = require("../middlewares/usersMiddleware");
 
 const usersController = require("../controllers/usersController");
 
@@ -11,6 +12,8 @@ const usersController = require("../controllers/usersController");
  *   get:
  *     summary: Retorna todos os usuários
  *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Lista de usuários
@@ -23,12 +26,15 @@ const usersController = require("../controllers/usersController");
  *                 properties:
  *                   username:
  *                     type: string
- *                     example: Username
+ *                     example: "Username"
  *                   password:
  *                     type: string
- *                     example: Senha
+ *                     example: "Senha"
+ *       401:
+ *         description: Não autorizado. O token JWT não foi fornecido ou é inválido.
+ *       500:
+ *         description: Erro interno do servidor.
  */
-
 router.get("/api/users", authMiddleware.checkToken, usersController.getAll);
 
 /**
@@ -65,9 +71,10 @@ router.get("/api/users", authMiddleware.checkToken, usersController.getAll);
  *                   type: string
  *                   example: "senha123"
  *       400:
- *         description: Erro no cadastro do usuário
+ *         description: Erro no cadastro do usuário (dados inválidos ou faltantes).
+ *       500:
+ *         description: Erro interno do servidor.
  */
-
 router.post("/api/register", usersController.createUser);
 
 // todo put e delete

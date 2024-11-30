@@ -2,16 +2,14 @@ const connection = require("./connection");
 const bcrypt = require("bcrypt");
 
 const getAllUsers = async () => {
-  const [users] = await connection.execute(
-    "SELECT email FROM gestao_empresarial.users"
-  );
+  const [users] = await connection.execute("SELECT email FROM users");
   return users;
 };
 
 const getOneUser = async (email) => {
-  const query = "SELECT * FROM gestao_empresarial.users WHERE email = ?";
-  const [user] = await connection.execute(query, [email]);
-  return user[0];
+  const query = "SELECT * FROM users WHERE email = ?";
+  const [rows] = await connection.execute(query, [email]);
+  return rows[0];
 };
 
 const createUser = async (user) => {
