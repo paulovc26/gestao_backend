@@ -24,12 +24,10 @@ const usersController = require("../controllers/usersController");
  *               items:
  *                 type: object
  *                 properties:
- *                   username:
+ *                   email:
  *                     type: string
  *                     example: "Username"
- *                   password:
- *                     type: string
- *                     example: "Senha"
+
  *       401:
  *         description: Não autorizado. O token JWT não foi fornecido ou é inválido.
  *       500:
