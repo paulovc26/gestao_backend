@@ -155,7 +155,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 // GET ROUTES
 router.get(
   "/api/servicos",
-  authMiddleware.checkToken,
+  // authMiddleware.checkToken,
   servicosController.getAll
 );
 
