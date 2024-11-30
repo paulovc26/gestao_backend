@@ -154,7 +154,11 @@ const authMiddleware = require("../middlewares/authMiddleware");
  *       scheme: bearer
  *       bearerFormat: JWT
  */
-router.get("/api/servicos", servicosController.getAll);
+router.get(
+  "/api/servicos",
+  authMiddleware.checkToken,
+  servicosController.getAll
+);
 
 // POST ROUTES
 router.post(
