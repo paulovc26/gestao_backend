@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const authMiddleware = require("../middlewares/authMiddleware");
 const fornecedoresController = require("../controllers/fornecedoresController");
+const authMiddleware = require("../middlewares/authMiddleware");
+const dadosMiddleware = require("../middlewares/dadosMiddleware");
 
 /**
  * @swagger
@@ -24,7 +25,7 @@ const fornecedoresController = require("../controllers/fornecedoresController");
  *                   id:
  *                     type: string
  *                     example: "1"
- *                   nome:
+ *                   fornecedor:
  *                     type: string
  *                     example: "Fornecedor A"
  *                   cpf_cnpj:
@@ -48,7 +49,7 @@ const fornecedoresController = require("../controllers/fornecedoresController");
  *           schema:
  *             type: object
  *             properties:
- *               nome:
+ *               fornecedor:
  *                 type: string
  *                 example: "Novo Fornecedor"
  *               cpf_cnpj:
@@ -66,7 +67,7 @@ const fornecedoresController = require("../controllers/fornecedoresController");
  *                 id:
  *                   type: string
  *                   example: "2"
- *                 nome:
+ *                 fornecedor:
  *                   type: string
  *                   example: "Novo Fornecedor"
  *                 cpf_cnpj:
@@ -74,6 +75,8 @@ const fornecedoresController = require("../controllers/fornecedoresController");
  *                   example: "98765432100"
  *       400:
  *         description: Solicitação inválida (dados de entrada incorretos).
+ *       411:
+ *         description: CPF precisa ter 11 dígitos ou CNPJ precisa ter 14 dígitos.
  *       401:
  *         description: Não autorizado. O token JWT não foi fornecido ou é inválido.
  *       500:
@@ -99,7 +102,7 @@ const fornecedoresController = require("../controllers/fornecedoresController");
  *           schema:
  *             type: object
  *             properties:
- *               nome:
+ *               fornecedor:
  *                 type: string
  *                 example: "Fornecedor Atualizado"
  *               cpf_cnpj:
@@ -117,7 +120,7 @@ const fornecedoresController = require("../controllers/fornecedoresController");
  *                 id:
  *                   type: string
  *                   example: "1"
- *                 nome:
+ *                 fornecedor:
  *                   type: string
  *                   example: "Fornecedor Atualizado"
  *                 cpf_cnpj:
@@ -129,6 +132,8 @@ const fornecedoresController = require("../controllers/fornecedoresController");
  *         description: Não autorizado. O token JWT não foi fornecido ou é inválido.
  *       404:
  *         description: Fornecedor não encontrado com o ID fornecido.
+ *       411:
+ *         description: CPF precisa ter 11 dígitos ou CNPJ precisa ter 14 dígitos.
  *       500:
  *         description: Erro interno do servidor.
  *
@@ -173,13 +178,15 @@ router.get(
 
 router.post(
   "/api/fornecedores",
-  authMiddleware.checkToken,
+  // authMiddleware.checkToken,
+  dadosMiddleware.validateCpfCnpj,
   fornecedoresController.createFornecedor
 );
 
 router.put(
   "/api/fornecedores/:id",
   authMiddleware.checkToken,
+  dadosMiddleware.validateCpfCnpj,
   fornecedoresController.updateFornecedor
 );
 

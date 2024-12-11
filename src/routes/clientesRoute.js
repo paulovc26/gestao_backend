@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const clientesController = require("../controllers/clientesController");
 const authMiddleware = require("../middlewares/authMiddleware");
+const dadosMiddleware = require("../middlewares/dadosMiddleware");
 
 /**
  * @swagger
@@ -74,6 +75,8 @@ const authMiddleware = require("../middlewares/authMiddleware");
  *         description: Solicitação inválida (dados de entrada incorretos).
  *       401:
  *         description: Não autorizado. O token JWT não foi fornecido ou é inválido.
+ *       411:
+ *         description: CPF precisa ter 11 dígitos ou CNPJ precisa ter 14 dígitos.
  *       500:
  *         description: Erro interno do servidor.
  *
@@ -124,6 +127,8 @@ const authMiddleware = require("../middlewares/authMiddleware");
  *         description: Solicitação inválida ou dados de entrada incorretos.
  *       401:
  *         description: Não autorizado. O token JWT não foi fornecido ou é inválido.
+ *       411:
+ *         description: CPF precisa ter 11 dígitos ou CNPJ precisa ter 14 dígitos.
  *       404:
  *         description: Cliente não encontrado com o ID fornecido.
  *       500:
@@ -170,13 +175,15 @@ router.get(
 
 router.post(
   "/api/clientes",
-  authMiddleware.checkToken,
+  //authMiddleware.checkToken,
+  dadosMiddleware.validateCpfCnpj,
   clientesController.createCliente
 );
 
 router.put(
   "/api/clientes/:id",
   authMiddleware.checkToken,
+  dadosMiddleware.validateCpfCnpj,
   clientesController.updateCliente
 );
 

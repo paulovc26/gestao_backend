@@ -6,20 +6,20 @@ const getAllFornecedores = async () => {
   return fornecedores;
 };
 
-// const getOneFornecedor = async (nome_fornecedor) => {
-//   const query = "SELECT * FROM fornecedores WHERE nome_fornecedor = ?;";
-//   const [cliente] = await connection.execute(query, [nome_fornecedor]);
+// const getOneFornecedor = async (fornecedor) => {
+//   const query = "SELECT * FROM fornecedores WHERE fornecedor = ?;";
+//   const [cliente] = await connection.execute(query, [fornecedor]);
 //   return cliente;
 // };
 
 const createFornecedor = async (cliente) => {
-  const { nome_fornecedor, cpf_cnpj } = cliente;
+  const { fornecedor, cpf_cnpj } = cliente;
 
   const query =
-    "INSERT INTO tb_fornecedores(nome_fornecedor, cpf_cnpj) VALUES (?, ?)";
+    "INSERT INTO tb_fornecedores(fornecedor, cpf_cnpj) VALUES (?, ?)";
 
   const [createdFornecedor] = await connection.execute(query, [
-    nome_fornecedor,
+    fornecedor,
     cpf_cnpj,
   ]);
 
@@ -36,9 +36,9 @@ const updateFornecedor = async (id, cliente) => {
   const fields = [];
   const values = [];
 
-  if (cliente.nome_fornecedor !== undefined) {
-    fields.push("nome_fornecedor = ?");
-    values.push(cliente.nome_fornecedor);
+  if (cliente.fornecedor !== undefined) {
+    fields.push("fornecedor = ?");
+    values.push(cliente.fornecedor);
   }
   if (cliente.cpf_cnpj !== undefined) {
     fields.push("cpf_cnpj = ?");
