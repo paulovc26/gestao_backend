@@ -175,7 +175,7 @@ router.get(
 
 router.post(
   "/api/clientes",
-  //authMiddleware.checkToken,
+  authMiddleware.checkToken,
   dadosMiddleware.validateCpfCnpj,
   clientesController.createCliente
 );

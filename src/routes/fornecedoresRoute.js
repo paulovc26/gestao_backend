@@ -178,7 +178,7 @@ router.get(
 
 router.post(
   "/api/fornecedores",
-  // authMiddleware.checkToken,
+  authMiddleware.checkToken,
   dadosMiddleware.validateCpfCnpj,
   fornecedoresController.createFornecedor
 );
