@@ -15,6 +15,12 @@ const contratosClientesRoute = require("./contratosClientesRoute");
 const authRoute = require("./authRoute");
 const contratosFornecedoresRoute = require("./contratosFornecedoresRoute");
 
+// ROTA INDEX
+
+router.get("/", (req, res) => {
+  res.redirect("/api-docs");
+});
+
 // Usar as rotas importadas
 router.use(usersRoutes);
 router.use(fornecedoresRoute);
